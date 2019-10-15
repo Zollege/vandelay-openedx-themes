@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Lora:400,700&display=swap');
+
+$blue-theme: #2666ef;
+$font-family-theme: 'Lora', serif;
+
+$primary: $blue-theme;
+$action-primary-bg: $blue-theme;
+$monospace: $font-family-theme;
+$serif: $font-family-theme;
+$f-serif: $font-family-theme;
+$f-monospace: $font-family-theme;
+$font-family-sans-serif: $font-family-theme;
+
+@import 'edx-bootstrap/sass/open-edx/theme';

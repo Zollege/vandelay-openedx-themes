@@ -1,0 +1,63 @@
+## mako
+<%page expression_filter="h"/>
+<%!
+  from django.urls import reverse
+  from django.utils.translation import ugettext as _
+  from branding.api import get_footer
+  from openedx.core.djangoapps.lang_pref.api import footer_language_selector_is_enabled
+%>
+<% footer = get_footer(is_secure=is_secure) %>
+<%namespace name='static' file='static_content.html'/>
+
+<div class="wrapper wrapper-footer">
+  <footer id="footer-openedx" class="grid-container"
+  ## When rendering the footer through the branding API,
+  ## the direction may not be set on the parent element,
+  ## so we set it here.
+  % if bidi:
+  dir=${bidi}
+  % endif
+  >
+  <div class="colophon">
+    <nav class="nav-colophon" aria-label="${_('About')}">
+      <ul>
+        <li><a href="https://zollege.com/" target="_blank">${_('Home')}</a></li>
+        <li><a href="https://zollege.com/strategy/" target="_blank">${_('Strategy')}</a></li>
+        <li><a href="https://zollege.com/team/" target="_blank">${_('Team')}</a></li>
+        <li><a href="https://zollege.com/contact/" target="_blank">${_('Contact')}</a></li>
+      </ul>
+    </nav>
+
+    <div class="wrapper-logo">
+      <p>
+        <a href="/">
+          <img alt="organization logo" src="${static.url('images/logo-footer.png')}" width="140">
+        </a>
+      </p>
+    </div>
+
+    ## Site operators: Please do not remove this paragraph! This attributes back to edX and makes your acknowledgement of edX's trademarks clear.
+    <p class="copyright">© 2019 Zollege</p>
+ 
+  </div>
+
+  <div class="footer-logos">
+    <a href="https://vandelayeducation.com"><img src="${static.url('images/vandelay.png')}" width="200"></a>
+    <a href="https://circleeducation.com/"><img src="${static.url('images/CircleEducation.png')}" width="200"></a>
+  </div>
+
+  
+</footer>
+</div>
+
+% if include_dependencies:
+  <%static:js group='base_vendor'/>
+  <%static:css group='style-vendor'/>
+  <%include file="widgets/segment-io.html" />
+  <%include file="widgets/segment-io-footer.html" />
+% endif
+% if footer_css_urls:
+  % for url in footer_css_urls:
+    <link rel="stylesheet" type="text/css" href="${url}"></link>
+  % endfor
+% endif
