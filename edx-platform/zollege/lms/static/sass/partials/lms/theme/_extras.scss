@@ -224,6 +224,11 @@
 			height: 120px;
 		}
 	}
-
 } 
 
+// Register page
+
+.login-register .form-field label.focus-out {
+	position: relative;
+	padding-left: 0;
+}
