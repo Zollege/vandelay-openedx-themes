@@ -1,0 +1,8 @@
+<%namespace name='static' file='static_content.html'/>
+<% gtm_acct = static.get_value("GOOGLE_TAG_MANAGER_ACCOUNT", "") %>
+% if gtm_acct:
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${gtm_acct | n, js_escaped_string}"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+% endif
