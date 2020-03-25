@@ -236,11 +236,25 @@
 			width: 100%;
 		}
 	}
-} 
+}
 
 // Register page
 
 .login-register .form-field label.focus-out {
 	position: relative;
 	padding-left: 0;
+}
+
+//-----------------
+// HIDING REGISTRATION LINKS
+//-----------------
+
+// Hiding registration on login/register view
+.login-register-content .login-register .toggle-form {
+	display: none;
+}
+
+// Hiding registration on navbar
+.main-header .nav-links .secondary .register-btn {
+	display: none;
 }
