@@ -61,17 +61,3 @@
     <link rel="stylesheet" type="text/css" href="${url}"></link>
   % endfor
 % endif
-
-% if user.is_authenticated:
-<script type="text/javascript">
-  var userId = '${user.id}';
-  var userName = '${user.username}';
-  var userMail = '${user.email}';
-  if (window.LogRocket) {
-      window.LogRocket.identify(userId, {
-        name: userName,
-        email: userMail.toLowerCase(),
-      });
-    }
-</script>
-%endif
