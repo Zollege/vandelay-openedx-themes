@@ -38,7 +38,7 @@
 
     ## Site operators: Please do not remove this paragraph! This attributes back to edX and makes your acknowledgement of edX's trademarks clear.
     <p class="copyright">© 2019 Zollege</p>
- 
+
   </div>
 
   <div class="footer-logos">
@@ -46,7 +46,7 @@
     <a href="https://circleeducation.com/"><img src="${static.url('images/CircleEducation.png')}" width="200"></a>
   </div>
 
-  
+
 </footer>
 </div>
 
@@ -64,14 +64,28 @@
 
 % if user.is_authenticated:
 <script type="text/javascript">
-  var userId = '${user.id}';
-  var userName = '${user.username}';
-  var userMail = '${user.email}';
-  if (window.LogRocket) {
-      window.LogRocket.identify(userId, {
-        name: userName,
-        email: userMail.toLowerCase(),
-      });
-    }
+  document.addEventListener("DOMContentLoaded", function(){
+    const maxLogRocketIdentifyAttempts = 5;
+    const logRocketIdentifyInterval = 2000;
+    var logRocketUserId = '${user.id}';
+    var logRocketUserName = '${user.username}';
+    var logRocketUserMail = '${user.email}';
+    (function identifyLogRocket(count) {
+      if (window.LogRocket) {
+        window.LogRocket.identify(logRocketUserId, {
+          name: logRocketUserName,
+          email: logRocketUserMail.toLowerCase(),
+        });
+        console.log('LogRocket session identified successfully');
+        return;
+      } else if (count < maxLogRocketIdentifyAttempts) {
+        window.setTimeout(function() {
+          identifyLogRocket(count + 1);
+        }, logRocketIdentifyInterval);
+        return;
+      }
+      console.log('Unable to identify LogRocket session');
+    })(0);
+  });
 </script>
 %endif
