@@ -67,8 +67,8 @@
   document.addEventListener("DOMContentLoaded", function(){
     const maxLogRocketIdentifyAttempts = 5;
     const logRocketIdentifyInterval = 2000;
-    var logRocketUserId = '${user.id}';
-    var logRocketUserName = '${user.username}';
+    var logRocketUserId = '${user.username}';
+    var logRocketUserName = '${ getattr(getattr(user, 'profile'), 'name', '') }';
     var logRocketUserMail = '${user.email}';
     (function identifyLogRocket(count) {
       if (window.LogRocket) {
