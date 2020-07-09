@@ -73,5 +73,25 @@
       console.log('Unable to identify LogRocket session');
     })(0);
   });
+  $(window).load (function () {
+    var target, config, observer;
+    function initHighlight(){
+      document.querySelectorAll('pre code').forEach(
+        block => hljs.highlightBlock(block)
+      );
+    }
+    if($('#seq_content').length > 0){
+      observer = new MutationObserver(function(mutations){
+        mutations.forEach(function(mutation){
+          if($('pre code').length > 0){
+            initHighlight();
+          }
+        });
+      });
+      target = $('#seq_content');
+      config = { attributes: true};
+      observer.observe(target[0], config );
+    }
+  })
 </script>
 %endif
